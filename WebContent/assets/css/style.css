@@ -1,37 +1,10 @@
 body{
-	background:#ffffff;	
+	background: url('../images/light_wool.png');
 }
 
-#header{
+#header {
 	background: #464646;
-	padding:10px 0;
 }
-#header .sidebar{
-	padding:20px;
-}
-
-#category_menu{
-	background:#eeeeee;
-	padding:10px;
-}
-
-#mainBody{
-	margin-top:10px;
-}
-.alert {
-	margin-top:5px;
-}
-.items-list{
-	width:70%;
-}
-.add-to-input{
-	width: 25px;
-	margin-right: 4px;
-}
-.right-col{
-	margin-top:4em;
-}
-
-.shoppingCartTable td{
-	vertical-align: middle !important;
+#header .header_sidebar{
+	margin-top: 25px;
 }

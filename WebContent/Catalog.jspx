@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:fn='http://java.sun.com/jsp/jstl/functions' version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Welcome to Foods R Us</title>
+<link href="${app_root}/assets/css/bootstrap.css" rel="stylesheet" />
+<link href="${app_root}/assets/css/bootstrap-theme.css" rel="stylesheet" />
+<link href="${app_root}/assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-2">
+					<h4>
+						<a href="${app_root}/Catalog" class="brand"> <img
+							src="${app_root}/assets/images/efood_logo.png" height="70"
+							alt="company logo" /> <small class="visible-xs">Foods R
+								Us</small>
+						</a>
+					</h4>
+				</div>
+				<div class="col-sm-5 col-sm-offset-2 header_sidebar">
+					<form action="/Search" method="get">
+						<div class="input-group">
+							<input type="text" name="search_term" class="form-control" /> <span
+								class="input-group-btn">
+								<button type="submit" name="search" class="btn btn-primary">Search</button>
+							</span>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-3 header_sidebar">
+					<div class="pull-right">
+						<a href="${app_root}/Login" class="btn btn-info"> Sign In </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- /header -->
+</body>
+	</html>
+</jsp:root>
