@@ -8,3 +8,7 @@ body{
 #header .header_sidebar{
 	margin-top: 25px;
 }
+
+#category_list ul {
+	list-style-type: none;
+}

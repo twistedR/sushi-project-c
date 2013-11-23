@@ -59,7 +59,7 @@ public class Catalog extends HttpServlet {
 		
 		//We always need the categories
 		List<CategoryBean> cat = m.getCategories();
-		
+		request.setAttribute("cat_list", cat);
 		
 		String location;
 		location="Catalog.jspx";
