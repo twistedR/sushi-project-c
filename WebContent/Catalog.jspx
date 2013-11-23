@@ -39,31 +39,72 @@
 						</div>
 					</form>
 				</div>
-				<div class="col-md-3 header_sidebar">
+				<div class="col-sm-3 header_sidebar">
 					<div class="pull-right">
 						<a href="${app_root}/Login" class="btn btn-info"> Sign In </a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div><!-- /header -->
-	
+	</div>
+	<!-- /header -->
+
 	<div id="category_list">
-	<div class="container">
-	<div class="row btn-group">
-	
-	<div class="col-sm-2 col-sm-offset-1"><a href="${app_root }/Catalog?cat_id=" class="btn btn-primary cat_button">All</a></div>
-	<c:forEach var="item" items="${cat_list }">
-	<div class="col-sm-2"><a href="${app_root }/Catalog?cat_id=${item.id}" class="btn btn-primary cat_button">${item.name}</a></div>
-	
-	</c:forEach>
-	
+		<div class="container">
+			<div class="btn-group btn-group-justified">
+				<a href="${app_root }/Catalog?cat_id="
+					class="btn btn-primary cat_button">All</a>
+				<c:forEach var="item" items="${cat_list }">
+					<a href="${app_root }/Catalog?cat_id=${item.id}"
+						class="btn btn-primary cat_button">${item.name}</a>
+
+				</c:forEach>
+
+			</div>
+		</div>
 	</div>
+	<div id="main_body" class="container">
+		<div class="row">
+			<div class="col-sm-8">
+				<ul>
+					<c:choose>
+						<c:when test="${empty items_list }">
+							<h1>No items found</h1>
+						</c:when>
+						<c:otherwise>
+							<ul>
+								<c:forEach var="i" items="${items_list }">
+									<li>${i.name }</li>
+								</c:forEach>
+							</ul>
+
+							<ul class="pagination">
+								<li><a href="${app_root}/Catalog?page=1&amp;cat_id=${current_cat}">&#171;</a></li>
+								<c:forEach var="pn" begin="1" end="${max_pages}">
+									<c:choose>
+										<c:when test="${pn eq curr_page }">
+											<li class="active"><a href="${app_root}/Catalog?page=${pn }&amp;cat_id=${current_cat}"> ${pn}
+											</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="${app_root}/Catalog?page=${pn }&amp;cat_id=${current_cat}">${pn}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<li><a href="${app_root}/Catalog?page=${max_pages }&amp;cat_id=${current_cat}">&#187;</a></li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<!-- Shopping cart goes here -->
+			</div>
+		</div>
 	</div>
-	</div>
-	
-	
-	
+
+
+
 </body>
 	</html>
 </jsp:root>

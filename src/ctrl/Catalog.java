@@ -52,22 +52,34 @@ public class Catalog extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// Setup the application root for static files
 		request.setAttribute("app_root", request.getContextPath());
-		
-		
-		//Grab the model
-		ApplicationModel m = (ApplicationModel) getServletContext().getAttribute("model");
-		
-		//We always need the categories
+
+		// Grab the model
+		ApplicationModel m = (ApplicationModel) getServletContext()
+				.getAttribute("model");
+
+		// We always need the categories
 		List<CategoryBean> cat = m.getCategories();
 		request.setAttribute("cat_list", cat);
-		
+
 		String location;
-		location="Catalog.jspx";
-		
+		location = "Catalog.jspx";
+
 		String cat_id = request.getParameter("cat_id");
-		 
+		request.setAttribute("current_cat", cat_id);
 		
+		String page = request.getParameter("page");
+		if(page == null || page.trim().isEmpty()) page ="1";
+		request.setAttribute("curr_page", page);
 		
+		List<ItemBean> items = m.getItems(cat_id, page);
+		request.setAttribute("items_list", items);
+		
+		int itemCount = m.getItemsCount(cat_id);
+		request.setAttribute("item_count", itemCount);
+		
+		int maxPages = (int) Math.ceil(itemCount / 10.0);
+		request.setAttribute("max_pages", maxPages);
+
 		request.getRequestDispatcher(location).forward(request, response);
 	}
 

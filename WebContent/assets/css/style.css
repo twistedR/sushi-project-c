@@ -9,6 +9,6 @@ body{
 	margin-top: 25px;
 }
 
-#category_list ul {
-	list-style-type: none;
+#category_list {
+	margin-top:2em;
 }
