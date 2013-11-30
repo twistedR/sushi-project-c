@@ -1,0 +1,97 @@
+/*
+	Define the rows for the welcome page
+*/
+
+.quick-access-bar ul.left-nav{
+	list-style-type:none;
+	padding: 0;
+	margin:0;
+}
+.quick-access-bar ul.left-nav li{
+	display: inline-block;
+	margin-right: 3ex;
+}
+.quick-access-bar ul.left-nav li a {
+	font-size: 1.25em;
+}
+.quick-access-bar ul.left-nav li a:hover {
+	text-decoration:none;
+	color: #000;
+}
+li.home-nav a{
+	color:#FF7A00;
+}
+
+.branding-row{
+	background:#FF7A00;
+	padding:1em;
+}
+
+.info-row{
+	margin-top:10px;
+	background:#f1f6f9;
+	padding:1em;
+}
+
+.catalog-row{
+	background:#00c6d4;
+	margin-top:10px;
+	padding:1em;
+	color: rgb(112, 88, 64);
+}
+
+.catalog-row .cat a{
+	display:block;
+	height: 200px;
+	font-size:36px;
+	overflow:hidden;
+	
+	color:#fff;
+	font-weight:bold;
+	text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+.catalog-row .cat a span{
+	padding-top: 82px;
+	display:block;
+}
+.catalog-row .cat a:hover{
+	opacity:0.8;
+	color:#000;
+	text-shadow:
+   -1px -1px 0 #fff,  
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+     1px 1px 0 #fff;
+	text-decoration:none;
+}
+
+.catalog-row .cat.cat-meat a{
+	background: url('../images/cat_meat.jpg') center center no-repeat;
+}
+.catalog-row .cat.cat-cheese a{
+	background: url('../images/cat_cheese.jpg') center center no-repeat;
+}
+.catalog-row .cat.cat-icecream a{
+	background: url('../images/cat_icecream.jpg') center center no-repeat;
+}
+.catalog-row .cat.cat-cereal a{
+	background: url('../images/cat_cereal.jpg') center center no-repeat;
+}
+
+
+.footer-row{
+	margin-top:10px;
+	padding:1em 0 1.5em 0;
+}
+
+/*****
+	HELPERS
+******/
+
+.white-text{
+	color:#fff;
+}

@@ -14,12 +14,132 @@
 <title>Welcome to Foods R Us</title>
 <link href="${app_root}/assets/css/bootstrap.css" rel="stylesheet" />
 <link href="${app_root}/assets/css/bootstrap-theme.css" rel="stylesheet" />
-<link href="${app_root}/assets/css/style.css" rel="stylesheet" />
+<link href="${app_root}/assets/css/welcome_page.css" rel="stylesheet" />
+<script src="${app_root}/assets/js/welcome_page.js">&#160;</script>
 </head>
-<body>
-	<div class="col-xs-12">
-		<h1>Welcome to Foods R Us!</h1>
-		<a href="${app_root}/Catalog">View out Catalog</a>
+<body onload="documentReady()">
+	<div class="col-sm-12 hidden-xs quick-access-bar">
+		<div class="row">
+			<div class="col-sm-5">
+				<ul class="left-nav">
+					<li><img src="${app_root}/assets/images/logo_header.png"
+						height="50" /></li>
+					<li class="home-nav"><a href="${app_root}">Home</a></li>
+					<li><a href="${app_root}/Catalog">Catalog</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-7">
+				<div class="pull-right">
+					<c:choose>
+						<c:when test="${not empty sessionScope.client }">
+							<p class="lead" style="margin: 4% 2ex 0 0; padding: 0;">
+								<a href="${app_root}/Authorization?action=logout"
+									class="btn btn-danger">Log out: ${sessionScope.client.name }</a>
+							</p>
+						</c:when>
+						<c:otherwise>
+							<p class="lead" style="margin: 4% 2ex 0 0; padding: 0;">
+								Already a member? <a
+									href="${app_root}/Authorization?action=login"
+									class="btn btn-primary">Log In</a>
+							</p>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /quick-access row -->
+
+	<div class="col-xs-12 branding-row">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="row">
+					<div
+						class="col-xs-4 col-xs-offset-3 col-md-3 col-md-offset-4 col-lg-2 col-lg-offset-5">
+						<img src="${app_root}/assets/images/main_logo_500.png"
+							class="img-responsive" />
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="text-center white-text">
+					<h1>Grocery shopping at your finger tips!</h1>
+					<h1>
+						<a href="${app_root}/Catalog" class="btn btn-lg btn-default">Get
+							Started >></a>
+					</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Branding -->
+
+	<div class="col-xs-12 info-row">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-4">
+				<h1 style="color: rgb(0, 132, 114);" class="text-right">Who are
+					we?</h1>
+			</div>
+			<div class="col-md-4 text-justified">
+				<blockquote>
+					<p class="lead">Curabitur eleifend augue venenatis risus luctus
+						consectetur. Vestibulum quis hendrerit velit, sed convallis odio.
+						Mauris vitae libero non turpis fringilla cursus. Aliquam a
+						consectetur quam. Morbi pellentesque nulla at dui consectetur, eu
+						tincidunt ligula hendrerit. Sed semper nibh pretium, convallis
+						enim ac, porttitor ligula.</p>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 catalog-row">
+		<div class="row text-center">
+			<div class="col-xs-12">
+				<h1>Browse out selection from one of the following categories</h1>
+			</div>
+			<div class="col-md-3 cat cat-meat">
+				<a href="${app_root}/Catalog?cat_id=1"><span>MEAT</span></a>
+			</div>
+			<div class="col-md-3 cat cat-cheese">
+				<a href="${app_root}/Catalog?cat_id=2"><span>CHEESE</span></a>
+			</div>
+			<div class="col-md-3 cat cat-icecream">
+				<a href="${app_root}/Catalog?cat_id=3"><span>ICE CREAM</span></a>
+			</div>
+			<div class="col-md-3 cat cat-cereal">
+				<a href="${app_root}/Catalog?cat_id=4"><span>CEREAL</span></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="pull-right">
+					<h2>
+						Or: <a href="${app_root}/ProjectC" class="btn btn-lg btn-default">View
+							all Items!</a>
+					</h2>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-xs-12 footer-row">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-3">
+				<p>Got a question?</p>
+				<p>
+					<span class="glyphicon glyphicon-envelope"></span><a
+						href="mailto:info@foodsrus.ca"> info@foodsrus.ca</a>
+				</p>
+			</div>
+			<div class="col-md-2">
+				<p></p>
+				<p>
+					&#169; Foods 'R' Us <em>2013</em>
+				</p>
+			</div>
+		</div>
 	</div>
 </body>
 	</html>

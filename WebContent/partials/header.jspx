@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:fn='http://java.sun.com/jsp/jstl/functions' version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+
+	<div id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<a href="${app_root}/Catalog">
+						<img src="${app_root}/assets/images/logo_header_full.png" />
+					</a>
+				</div>
+				<div class="col-md-3 col-md-offset-1">
+					<ul class="nav navbar-nav navbar-right">
+            <li><a href="${app_root}">Home</a></li>
+						<li class="home-nav"><a href="${app_root}/Catalog">Catalog</a></li>
+          </ul>
+					
+				</div>
+				<div class="col-md-3 push-down">
+					<form action="${app_root}/Search" method="get">
+						<div class="input-group">
+							<input type="text" name="search_term" class="form-control"
+								value="${current_search_term}" /> <span class="input-group-btn">
+								<button type="submit" name="search" class="btn btn-default">Search</button>
+							</span>
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-2 push-down">
+					<div class="pull-right">
+						<c:choose>
+							<c:when test="${not empty sessionScope.client }">
+								<a href="${app_root}/Authorization?action=logout"
+									class="btn btn-danger">Log out: ${sessionScope.client.name }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${app_root}/Authorization?action=login"
+									class="btn btn-primary">Sign In</a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /header -->
+
+</jsp:root>

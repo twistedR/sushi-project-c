@@ -1,14 +1,51 @@
 body{
-	background: url('../images/light_wool.png');
+	background:#eee;
 }
 
-#header {
-	background: #464646;
-}
-#header .header_sidebar{
-	margin-top: 25px;
+#header{
+	background:#FF7A00;
+	padding:0;
+	margin:0;
+	border-bottom: 3px solid #fff;
 }
 
-#category_list {
+#header .nav > li > a:hover,
+#header .nav > li > a:focus{
+	background-color: transparent;
+	
+}
+#header .push-down{
+	padding-top:0.5em;
+}
+
+#main{
 	margin-top:2em;
+}
+
+
+#item-filters{
+	background: #fff;
+	padding:0.75em 0;
+	border-bottom-right-radius: 4px;
+}
+.price-input{
+	display:inline-block;
+	width:30%;
+}
+
+.price-input-small{
+	width:35px;
+	display:inline-block;
+	margin-right: 1ex;
+}
+
+.item-listing{
+}
+hr.shadow{
+	border-color: #d5d9dc;
+	box-shadow: 0 1px 0 0 rgba(255,255,255,0.9)
+}
+
+.item-thumb{
+	opacity: 0.5;
 }

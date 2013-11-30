@@ -48,6 +48,7 @@ public class ItemBean {
 	}
 
 	public void setQuantity(int quantity) {
+		
 		this.quantity = quantity;
 	}
 

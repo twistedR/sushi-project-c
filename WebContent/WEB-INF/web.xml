@@ -4,4 +4,12 @@
   <welcome-file-list>
     <welcome-file>Welcome</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>HST</param-name>
+    <param-value>13</param-value>
+  </context-param>
+  <context-param>
+    <param-name>base-shipping</param-name>
+    <param-value>5</param-value>
+  </context-param>
 </web-app>
