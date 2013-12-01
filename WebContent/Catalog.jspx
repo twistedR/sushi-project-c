@@ -153,13 +153,20 @@
 				<div class="panel-footer clearfix">
 					<h3 class="panel-title pull-left">Sub Total: <fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.total }" /></h3>
 					<div class="pull-right">
-						<a href="${app_root}/Checkout" class="btn btn-xs btn-default">Checkout</a>
+						<c:choose>
+							<c:when test="${not empty sessionScope.client }">
+								<a href="${app_root}/Checkout" class="btn btn-xs btn-primary">Checkout</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${app_root}/ShoppingCart" class="btn btn-xs btn-primary">Final Review</a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
 		</div> <!-- /Shopping Cart -->
 	</div><!-- /Main Container -->
-
+	<jsp:include page="partials/footer.jspx" />
 </body>
 	</html>
 </jsp:root>

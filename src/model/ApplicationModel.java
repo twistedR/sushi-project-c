@@ -1,9 +1,23 @@
 package model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.transform.stream.StreamResult;
 
 public class ApplicationModel {
 
@@ -189,4 +203,120 @@ public class ApplicationModel {
 		 return client;
 		
 	}
+	
+	public String placeOrder(ShoppingCartBean sc, ClientBean c, String folderPath) throws JAXBException, IOException{
+
+		String poFormat = "po"+c.getNumber()+"_";
+		Date n =  new Date();
+		String d = (new SimpleDateFormat("yyyy-MM-dd")).format(n).toString();
+		
+		//Determine the filename
+		//Go through all files in the directory
+		File f = new File(folderPath);
+		File[] folderList = f.listFiles();
+		int lastOrder = 1;
+		for(File fl : folderList){
+			if(fl.isDirectory()){
+				File[] list = fl.listFiles();
+				for(File fi : list){
+					if(fi.isFile() && fi.getName().endsWith(".xml") && fi.getName().startsWith(poFormat)){
+						String orderNumber = fi.getName().substring(poFormat.length(), fi.getName().indexOf(".xml"));
+						try{
+							int t = Integer.parseInt(orderNumber);
+							if(t>lastOrder){
+								lastOrder = t;
+							}
+						}catch(Exception e){
+							//We messed up file lookup, don't do anything
+						}
+					}
+				}
+			}
+		}
+		lastOrder++;
+		String on = (String) (lastOrder < 10 ? "0"+lastOrder : ""+lastOrder);
+		String newOrderFile = poFormat + on + ".xml";
+		
+		
+		//Prepare the purchase order
+		PurchaseOrder po = new PurchaseOrder();
+		po.setOrderId(lastOrder);
+		
+		po.setSubmitted(d);
+		po.setCustomer(c);
+		po.setItems(sc.getItems());
+		po.setHst(sc.getHst());
+		po.setTotal(sc.getTotal());
+		po.setShipping(sc.getShipping());
+		po.setGrandTotal(sc.getGrandTotal());
+		
+		
+		JAXBContext jx = JAXBContext.newInstance(po.getClass());
+		Marshaller marshaller = jx.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+		
+		StringWriter sw = new StringWriter();
+		sw.write("<?xml version=\"1.0\"?>");
+		sw.write("<?xml-stylesheet type=\"text/xsl\" href=\"../po.xsl\"?>");
+//		sw.write("\n");
+		marshaller.marshal(po, new StreamResult(sw));
+		System.out.println(sw.toString());
+		
+		//Check if a folder for todays date exists
+		String finalFolder = Paths.get(folderPath, d).toString();
+		File t = new File(finalFolder);
+		if(!t.exists()){
+			t.mkdir();
+		}
+		
+		//Write it to file!
+		String finalFile = Paths.get(finalFolder, newOrderFile).toString();
+		
+		FileWriter fw = new FileWriter(finalFile);
+		fw.write(sw.toString());
+		fw.close();
+		
+		
+		return Paths.get(d, newOrderFile).toString();
+	}
+
+	public List<String> getPurchaseOrderList(String startDate, String endDate, String folderPath) throws Exception {
+		if(startDate==null){
+			throw new Exception("Start date is required");
+		}
+		List<String> dates = new ArrayList<String>();
+		if(endDate != null){
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			
+			Date date = format.parse(startDate);
+			Date date2 = format.parse(endDate);
+		
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			dates.add(format.format(cal.getTime()));
+			while (cal.getTime().before(date2)) {
+			    cal.add(Calendar.DATE, 1);
+			    dates.add(format.format(cal.getTime()));
+			}
+		}else {
+			dates.add(startDate);
+		}
+		
+		List<String> poList = new ArrayList<String>();
+		Iterator<String> it = dates.iterator();
+		while(it.hasNext()){
+			String temp = it.next();
+			System.out.println(temp);
+			File tf = new File(Paths.get(folderPath, temp).toString());
+			if(!tf.exists()) continue;
+			File[] fileList = tf.listFiles();
+			for(File f : fileList){
+				poList.add(temp+"/"+f.getName());
+			}
+		}
+		
+		return poList;
+	}
+
 }

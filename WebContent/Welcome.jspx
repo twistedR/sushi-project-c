@@ -99,16 +99,16 @@
 				<h1>Browse out selection from one of the following categories</h1>
 			</div>
 			<div class="col-md-3 cat cat-meat">
-				<a href="${app_root}/Catalog?cat_id=1"><span>MEAT</span></a>
+				<a href="${app_root}/Catalog?cat_id=3"><span>MEAT</span></a>
 			</div>
 			<div class="col-md-3 cat cat-cheese">
-				<a href="${app_root}/Catalog?cat_id=2"><span>CHEESE</span></a>
+				<a href="${app_root}/Catalog?cat_id=4"><span>CHEESE</span></a>
 			</div>
 			<div class="col-md-3 cat cat-icecream">
-				<a href="${app_root}/Catalog?cat_id=3"><span>ICE CREAM</span></a>
+				<a href="${app_root}/Catalog?cat_id=5"><span>ICE CREAM</span></a>
 			</div>
 			<div class="col-md-3 cat cat-cereal">
-				<a href="${app_root}/Catalog?cat_id=4"><span>CEREAL</span></a>
+				<a href="${app_root}/Catalog?cat_id=6"><span>CEREAL</span></a>
 			</div>
 		</div>
 		<div class="row">
@@ -124,23 +124,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 footer-row">
-		<div class="row">
-			<div class="col-md-2 col-md-offset-3">
-				<p>Got a question?</p>
-				<p>
-					<span class="glyphicon glyphicon-envelope"></span><a
-						href="mailto:info@foodsrus.ca"> info@foodsrus.ca</a>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<p></p>
-				<p>
-					&#169; Foods 'R' Us <em>2013</em>
-				</p>
-			</div>
-		</div>
-	</div>
+	<jsp:include page="partials/footer.jspx" />
 </body>
 	</html>
 </jsp:root>

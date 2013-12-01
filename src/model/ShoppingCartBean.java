@@ -80,8 +80,14 @@ public class ShoppingCartBean {
 		while(it.hasNext()){
 			ItemBean temp = it.next();
 			if(temp.getNumber().equals(i.getNumber())){
-				temp.setQuantity(quantity);
 				exists = true;
+				//Edge case
+				if(quantity<1){
+					this.items.remove(temp);
+				}else{
+					temp.setQuantity(quantity);
+				}
+				break;
 			}
 		}
 		if(exists != true){
@@ -98,7 +104,9 @@ public class ShoppingCartBean {
 		Iterator<ItemBean> it = items.iterator();
 		while(it.hasNext()){
 			ItemBean temp = it.next();
-			t += (temp.getQuantity()*temp.getPrice());
+			double tot = (temp.getQuantity()*temp.getPrice());
+			t += tot;
+			temp.setTotal(tot);
 		}
 		
 		this.total = t;
@@ -109,5 +117,21 @@ public class ShoppingCartBean {
 		this.setHst(taxes);
 		
 		this.setGrandTotal(this.getHst() + this.getTotal() + this.getShipping());
+	}
+
+	public void removeItem(String item_number) {
+		Iterator<ItemBean> it = items.iterator();
+		ItemBean removal = null;
+		while(it.hasNext()){
+			ItemBean temp = it.next();
+			if(temp.getNumber().equals(item_number)){
+				removal = temp;
+				break;
+			}
+		}
+		if(removal != null){
+			items.remove(removal);
+		}
+		this.calculateTotal();
 	}
 }

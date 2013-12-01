@@ -47,7 +47,25 @@ public class ShoppingCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Setup the application root for static files
+		request.setAttribute("app_root", request.getContextPath());
+		
+		if(request.getParameter("action")!=null && request.getParameter("action").equals("remove")){
+			String item_number = request.getParameter("in");
+			
+			//Get the shopping cart
+			ShoppingCartBean sc = (ShoppingCartBean) request.getSession().getAttribute("shopping_cart");
+			if(item_number==null || item_number.trim().isEmpty() || sc == null){
+				request.setAttribute("error", "Item doesn't exist in your shopping cart");
+			} else {
+				sc.removeItem(item_number);
+				response.sendRedirect(request.getContextPath() + "/ShoppingCart");
+				return;
+			}
+ 		}
+		
+		
+		request.getRequestDispatcher("ShoppingCart.jspx").forward(request, response);
 	}
 
 	/**
@@ -76,7 +94,6 @@ public class ShoppingCart extends HttpServlet {
 				System.out.println("exceptopn:" + e);
 			}
 
-			System.out.println(shoppingCart.getItems().size());
 			request.getSession().setAttribute("shopping_cart", shoppingCart);
 		}
 		response.sendRedirect(request.getHeader("referer"));

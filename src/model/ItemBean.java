@@ -1,8 +1,14 @@
 package model;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(propOrder={"name", "price", "quantity", "total"})
 public class ItemBean {
 	private String number, name;
-	private double price, costprice;
+	private double price, costprice, total;
 	private int quantity, onorder, reorder,catid, supid;
 	private String unit;
 	private CategoryBean category;
@@ -10,7 +16,8 @@ public class ItemBean {
 	public ItemBean(){
 		
 	}
-
+	
+	@XmlAttribute(name="number")
 	public String getNumber() {
 		return number;
 	}
@@ -18,7 +25,8 @@ public class ItemBean {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-
+	
+	@XmlElement(name="name")
 	public String getName() {
 		return name;
 	}
@@ -26,7 +34,8 @@ public class ItemBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@XmlElement(name="price")
 	public double getPrice() {
 		return price;
 	}
@@ -35,6 +44,7 @@ public class ItemBean {
 		this.price = price;
 	}
 
+	@XmlTransient
 	public double getCostprice() {
 		return costprice;
 	}
@@ -42,7 +52,16 @@ public class ItemBean {
 	public void setCostprice(double costprice) {
 		this.costprice = costprice;
 	}
+	@XmlElement(name="extended")
+	public double getTotal() {
+		return total;
+	}
 
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	
+	@XmlElement(name="quantity")
 	public int getQuantity() {
 		return quantity;
 	}
@@ -52,6 +71,7 @@ public class ItemBean {
 		this.quantity = quantity;
 	}
 
+	@XmlTransient
 	public int getOnorder() {
 		return onorder;
 	}
@@ -60,6 +80,7 @@ public class ItemBean {
 		this.onorder = onorder;
 	}
 
+	@XmlTransient
 	public int getReorder() {
 		return reorder;
 	}
@@ -68,6 +89,7 @@ public class ItemBean {
 		this.reorder = reorder;
 	}
 
+	@XmlTransient
 	public int getCatid() {
 		return catid;
 	}
@@ -76,6 +98,7 @@ public class ItemBean {
 		this.catid = catid;
 	}
 
+	@XmlTransient
 	public int getSupid() {
 		return supid;
 	}
@@ -84,14 +107,16 @@ public class ItemBean {
 		this.supid = supid;
 	}
 
+	@XmlTransient
 	public String getUnit() {
 		return unit;
 	}
 
+	
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-
+	@XmlTransient
 	public CategoryBean getCategory() {
 		return category;
 	}
