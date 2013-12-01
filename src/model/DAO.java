@@ -109,13 +109,14 @@ public class DAO {
 			if (catId == -1) {
 				// WE need all items
 				sql = "SELECT count(*) from ITEM WHERE "
-						+ "(lower(i.NAME) like ? OR lower(i.NUMBER) like ?) AND "
-						+ "PRICE > ? AND PRICE < ?";
+						+ "PRICE > ? AND PRICE < ? AND "
+						+ "(lower(NAME) like ? OR lower(NUMBER) like ?)";
 				ps = conn.prepareStatement(sql);
 			} else {
 				sql = "SELECT COUNT(*) FROM ITEM WHERE CATID=? AND "
-						+ "(lower(i.NAME) like ? OR lower(i.NUMBER) like ?) AND "
-						+ "PRICE > ? AND PRICE < ?";
+						+ "PRICE > ? AND PRICE < ? AND "
+						+ "(lower(NAME) like ? OR lower(NUMBER) like ?)";
+				
 				ps = conn.prepareStatement(sql);
 				ps.setInt(sp, catId);
 				sp++;
@@ -123,7 +124,10 @@ public class DAO {
 			ps.setDouble(sp, minPrice);
 			sp++;
 			ps.setDouble(sp, maxPrice);
-
+			sp++;
+			ps.setString(sp, "%" + search_term + "%");
+			sp++;
+			ps.setString(sp, "%" + search_term + "%");
 			ResultSet rs = ps.executeQuery();
 			int count = 0;
 			if (rs.next()) {

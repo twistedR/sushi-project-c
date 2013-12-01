@@ -162,7 +162,7 @@ public class ApplicationModel {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Could not get items because of:" + e);
+			System.out.println("Could not get items count because of:" + e);
 		}
 		return count;
 	}
