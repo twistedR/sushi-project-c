@@ -49,7 +49,7 @@ public class ShoppingCart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Setup the application root for static files
 		request.setAttribute("app_root", request.getContextPath());
-		
+		System.out.println("In the cart");
 		if(request.getParameter("action")!=null && request.getParameter("action").equals("remove")){
 			String item_number = request.getParameter("in");
 			

@@ -1,6 +1,18 @@
 body{
 	background:#eee;
 }
+html, body {
+	height: 100%;
+	width: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
+}
+
+#wrapper{
+	min-height:100%;
+	padding-bottom:50px;
+}
 
 #header{
 	background:#FF7A00;
@@ -61,7 +73,8 @@ table.no-border td{
 
 
 .footer-row{
-	margin-top:10px;
-	padding:1em 0 1.5em 0;
+	padding:8px 0 15px 0;
+	height:50px;
 	background: #fff;
+	margin-top:-50px;
 }

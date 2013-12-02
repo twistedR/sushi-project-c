@@ -17,84 +17,87 @@
 <link href="${app_root}/assets/css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="partials/header.jspx" />
+	<div id="wrapper">
+		<jsp:include page="partials/header.jspx" />
+		<div id="main" class="container">
+			<div class="page-header">
+		  	<h1>Your Shopping cart: <br/>
+		  	<small>Final review before payment</small></h1>
+			</div>
 	
-	<div id="main" class="container">
-		<div class="page-header">
-	  	<h1>Your Shopping cart: <br/>
-	  	<small>Final review before payment</small></h1>
-		</div>
-
-		<c:choose>
-			<c:when test="${empty sessionScope.shopping_cart.items}">
-				<h4>Your cart is empty. Please add items to your cart!</h4>
-			</c:when>
-			<c:otherwise>
-				<table class="table table-striped table-condensed table-responsive">
-					<thead>
-						<tr>
-							<td>Item Name</td>
-							<td>Qty</td>
-							<td>Price(EA)</td>
-							<td>Total</td>
-							<td>&#160;</td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="sc" items="${sessionScope.shopping_cart.items }">
+			<c:choose>
+				<c:when test="${empty sessionScope.shopping_cart.items}">
+					<h4>Your cart is empty. Please add items to your cart!</h4>
+				</c:when>
+				<c:otherwise>
+					<table class="table table-striped table-condensed table-responsive">
+						<thead>
 							<tr>
-								<form action="${app_root}/ShoppingCart" method="post">
-									<td><input type="hidden" value="${sc.number}" name="item_number"/>${sc.name }</td>
-									<td><input type="text" name="item_quantity" value="${sc.quantity }" class="price-input" /></td>
-									<td><fmt:formatNumber type="currency" value="${sc.price }" /></td>
-									<td><fmt:formatNumber type="currency" value="${sc.total }" /></td>
-									<td>
-										<button name="add_to_cart" value="add_to_cart" class="btn btn-success btn-xs">Update</button> &#160;
-										<a href="${app_root}/ShoppingCart?action=remove&amp;in=${sc.number}" class="btn btn-sm btn-danger">
-											<span class="glyphicon glyphicon-remove-circle"></span>
-										</a>
-									</td>
-								</form>
+								<td>Item Name</td>
+								<td>Item #</td>
+								<td>Qty</td>
+								<td>Price(EA)</td>
+								<td>Total</td>
+								<td>&#160;</td>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<div class="row">
-					<div class="col-md-7" id="suggested_items">
-						&#160;
+						</thead>
+						<tbody>
+							<c:forEach var="sc" items="${sessionScope.shopping_cart.items }">
+								<tr>
+									<form action="${app_root}/ShoppingCart" method="post">
+										<td>${sc.name }</td>
+										<td><input type="hidden" value="${sc.number}" name="item_number"/>${sc.number }</td>
+										<td><input type="text" name="item_quantity" value="${sc.quantity }" class="price-input" /></td>
+										<td><fmt:formatNumber type="currency" value="${sc.price }" /></td>
+										<td><fmt:formatNumber type="currency" value="${sc.total }" /></td>
+										<td>
+											<button name="add_to_cart" value="add_to_cart" class="btn btn-success btn-xs">Update</button> &#160;
+											<a href="${app_root}/ShoppingCart?action=remove&amp;in=${sc.number}" class="btn btn-sm btn-danger">
+												<span class="glyphicon glyphicon-remove-circle"></span>
+											</a>
+										</td>
+									</form>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-md-7" id="suggested_items">
+							&#160;
+						</div>
+						<div class="col-md-5">
+							<table class="table table-bordered">
+								<tr>
+									<td class="bold">Subtotal</td>
+									<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.total }" /></td>
+								</tr>
+								
+								<tr>
+									<td class="bold">Shipping</td>
+									<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.shipping }" /></td>
+								</tr>
+								
+								<tr>
+									<td class="bold">HST</td>
+									<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.hst }" /></td>
+								</tr>
+								
+								<tr>
+									<td class="bold">Grand Total</td>
+									<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.grandTotal }" /></td>
+								</tr>
+								
+							</table>
+						</div>
 					</div>
-					<div class="col-md-5">
-						<table class="table table-bordered">
-							<tr>
-								<td class="bold">Subtotal</td>
-								<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.total }" /></td>
-							</tr>
-							
-							<tr>
-								<td class="bold">Shipping</td>
-								<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.shipping }" /></td>
-							</tr>
-							
-							<tr>
-								<td class="bold">HST</td>
-								<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.hst }" /></td>
-							</tr>
-							
-							<tr>
-								<td class="bold">Grand Total</td>
-								<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.grandTotal }" /></td>
-							</tr>
-							
-						</table>
+					<div class="text-center jumbotron">
+						<a href="${app_root}/Checkout" class="btn btn-lg btn-primary">Checkout!</a>
+						&#160; or <a href="${app_root}/Catalog">Add more items</a>
 					</div>
-				</div>
-				<div class="text-center jumbotron">
-					<a href="${app_root}/Checkout" class="btn btn-lg btn-primary">Checkout!</a>
-					&#160; or <a href="${app_root}/Catalog">Add more items</a>
-				</div>
-			</c:otherwise>
-		</c:choose>
-	</div><!-- /Main Container -->
+				</c:otherwise>
+			</c:choose>
+		</div><!-- /Main Container -->
+	</div>
 	<jsp:include page="partials/footer.jspx" />
 </body>
 	</html>
