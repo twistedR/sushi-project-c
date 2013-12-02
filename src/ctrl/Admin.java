@@ -1,6 +1,7 @@
 package ctrl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.ApplicationModel;
+import model.ShoppingCoupon;
 
 /**
  * Servlet implementation class Admin
@@ -97,6 +99,14 @@ public class Admin extends HttpServlet {
 				request.setAttribute("total_checkouts", checkouts);
 				request.setAttribute("avg_checkout_time", avg_time);
 			} 
+			
+			//Coupons
+			List<ShoppingCoupon> coupons = (List<ShoppingCoupon>) getServletContext().getAttribute("coupons");
+			if(coupons==null){
+				coupons = new ArrayList<ShoppingCoupon>();
+				getServletContext().setAttribute("coupons", coupons);
+			}
+			request.setAttribute("coupons", coupons);
 			request.getRequestDispatcher("../AdminDashboard.jspx").forward(request, response);
 			
 		}
@@ -106,7 +116,36 @@ public class Admin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("here");
+		request.setAttribute("app_root", request.getContextPath());
+		List<ShoppingCoupon> coupons = (List<ShoppingCoupon>) getServletContext().getAttribute("coupons");
+		if(coupons==null){
+			coupons = new ArrayList<ShoppingCoupon>();
+			getServletContext().setAttribute("coupons", coupons);
+		}
+		if(request.getParameter("add_coupon") != null){
+			String couponCode = request.getParameter("coupon_code");
+			String couponMin = request.getParameter("coupon_min");
+			String couponOff = request.getParameter("coupon_off");
+			String password = request.getParameter("admin_password");
+			if(couponCode==null || couponCode.trim().isEmpty() || couponMin==null || couponMin.trim().isEmpty() || couponOff==null || couponOff.trim().isEmpty()){
+				request.setAttribute("error", "Not enough information provided.");
+			} else if(!password.equals(getServletContext().getInitParameter("admin-password"))){
+				request.setAttribute("error", "Incorrect password.");
+			}else {
+				try{
+					double min = Double.parseDouble(couponMin);
+					double off = Double.parseDouble(couponOff);
+					ShoppingCoupon sc = new ShoppingCoupon(off, min, couponCode);
+					coupons.add(sc);
+				}catch(Exception e){
+					request.setAttribute("error", "Not enough information provided.");
+					e.printStackTrace();
+				}
+			}
+		}
+		request.setAttribute("coupons", coupons);
+		request.getRequestDispatcher("../AdminDashboard.jspx").forward(request, response);
 	}
 
 }

@@ -1,8 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class ShoppingCartBean {
 	private ClientBean client;
@@ -12,6 +14,7 @@ public class ShoppingCartBean {
 	private double hst;
 	private double grandTotal;
 	private List<ItemBean> items;
+	private ShoppingCoupon coupon;
 	
 	public ShoppingCartBean(){
 		client = null;
@@ -73,6 +76,14 @@ public class ShoppingCartBean {
 	public void setItems(List<ItemBean> items) {
 		this.items = items;
 	}
+	
+	public ShoppingCoupon getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(ShoppingCoupon coupon) {
+		this.coupon = coupon;
+	}
 
 	public void addItem(ItemBean i, int quantity) {
 		Iterator<ItemBean> it = items.iterator();
@@ -99,26 +110,6 @@ public class ShoppingCartBean {
 		
 	}
 	
-	private void calculateTotal(){
-		double t = 0;
-		Iterator<ItemBean> it = items.iterator();
-		while(it.hasNext()){
-			ItemBean temp = it.next();
-			double tot = (temp.getQuantity()*temp.getPrice());
-			t += tot;
-			temp.setTotal(tot);
-		}
-		
-		this.total = t;
-		if(t>100){
-			this.setShipping(0);
-		}
-		double taxes = (this.getTotal() + this.getShipping()) * (this.getHstValue()/100.0);
-		this.setHst(taxes);
-		
-		this.setGrandTotal(this.getHst() + this.getTotal() + this.getShipping());
-	}
-
 	public void removeItem(String item_number) {
 		Iterator<ItemBean> it = items.iterator();
 		ItemBean removal = null;
@@ -133,5 +124,38 @@ public class ShoppingCartBean {
 			items.remove(removal);
 		}
 		this.calculateTotal();
+	}
+	
+	public boolean applyCoupon(ShoppingCoupon sc){
+		if(this.getTotal()>sc.getMinimum()){
+			this.setCoupon(sc);
+			this.calculateTotal();
+			return true;
+		}
+		return false;
+	}
+	
+	private void calculateTotal(){
+		double t = 0;
+		Iterator<ItemBean> it = items.iterator();
+		while(it.hasNext()){
+			ItemBean temp = it.next();
+			double tot = (temp.getQuantity()*temp.getPrice());
+			t += tot;
+			temp.setTotal(tot);
+		}
+		double off = (getCoupon().getPercent() * getTotal())/100.0;
+		this.total = t-off;
+		
+		
+		
+		
+		if(t>100){
+			this.setShipping(0);
+		}
+		double taxes = (this.getTotal() + this.getShipping()) * (this.getHstValue()/100.0);
+		this.setHst(taxes);
+		
+		this.setGrandTotal(this.getHst() + this.getTotal() + this.getShipping());
 	}
 }
