@@ -89,7 +89,7 @@ public class Admin extends HttpServlet {
 			Map<String, Long> checkout_times = (Map<String, Long>) getServletContext().getAttribute("checkout_times");
 			if(checkout_times!=null){
 				Long time = checkout_times.get("time");
-				Long checkouts = checkout_times.get("items");
+				Long checkouts = checkout_times.get("checkouts");
 				Double avg_time = (double) time/((double) checkouts);
 				avg_time = avg_time/1000.0;
 				avg_time = avg_time/60.0;

@@ -86,6 +86,9 @@
 						</tr>
 					</table>
 				</div>
+				<div class="col-md-7 col-md-offset-1 info-box">
+					<h4>Current Coupons</h4>
+				</div>
 			</div>
 		</div>
 	</div>

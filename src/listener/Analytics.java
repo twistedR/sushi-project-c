@@ -64,11 +64,11 @@ public class Analytics implements ServletRequestAttributeListener, HttpSessionAt
       		totalTime = totalTime + diff;
       		checkouts++;
       		checkout_times.put("time", totalTime);
-      		checkout_times.put("items", checkouts);
+      		checkout_times.put("checkouts", checkouts);
       		
       		System.out.println("Average Time: "+ ((double)totalTime/(double)checkouts));
       		
-      		sess.getServletContext().setAttribute("shopping_times", checkout_times);
+      		sess.getServletContext().setAttribute("checkout_times", checkout_times);
       		
         }
     }
