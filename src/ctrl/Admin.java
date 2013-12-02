@@ -2,6 +2,7 @@ package ctrl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import model.ApplicationModel;
 /**
  * Servlet implementation class Admin
  */
-@WebServlet("/Admin/getPOList")
+@WebServlet({"/Admin/getPOList", "/Admin/Analytics"})
 public class Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,7 +49,7 @@ public class Admin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ru = request.getRequestURI();
-		
+		request.setAttribute("app_root", request.getContextPath());
 		if(ru.endsWith("/Admin/getPOList")){
 			ApplicationModel  m = (ApplicationModel) getServletContext().getAttribute("model");
 			String startDate = request.getParameter("start_date");
@@ -67,10 +68,37 @@ public class Admin extends HttpServlet {
 			    }
 		    }
 				response.getWriter().println(builder.toString());
+				return;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return;
 			}
+		} else if(ru.endsWith("/Admin/Analytics")){
+			//We need the data
+			Map<String, Long> shopping_times = (Map<String, Long>) getServletContext().getAttribute("shopping_times");
+			if(shopping_times!=null){
+				Long time = shopping_times.get("time");
+				Long items = shopping_times.get("items");
+				Double avg_time = (double) time/((double) items);
+				avg_time = avg_time/1000.0;
+				avg_time = avg_time/60.0;
+				request.setAttribute("total_shopping_time", time);
+				request.setAttribute("total_shopping_items", items);
+				request.setAttribute("avg_shopping_time", avg_time);
+			} 
+			Map<String, Long> checkout_times = (Map<String, Long>) getServletContext().getAttribute("checkout_times");
+			if(checkout_times!=null){
+				Long time = checkout_times.get("time");
+				Long checkouts = checkout_times.get("items");
+				Double avg_time = (double) time/((double) checkouts);
+				avg_time = avg_time/1000.0;
+				avg_time = avg_time/60.0;
+				request.setAttribute("total_checkout_time", time);
+				request.setAttribute("total_checkouts", checkouts);
+				request.setAttribute("avg_checkout_time", avg_time);
+			} 
+			request.getRequestDispatcher("../AdminDashboard.jspx").forward(request, response);
+			
 		}
 	}
 

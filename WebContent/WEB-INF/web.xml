@@ -12,4 +12,8 @@
     <param-name>base-shipping</param-name>
     <param-value>5</param-value>
   </context-param>
+  <context-param>
+  	<param-name>admin-password</param-name>
+  	<param-value>anothersecret</param-value>
+  </context-param>
 </web-app>

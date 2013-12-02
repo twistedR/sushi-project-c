@@ -14,7 +14,7 @@
 				</style>
 			</head>
 			<body>
-				<div class="container" id="main">
+				<div class="container" id="wrapper">
 					<div class="row">
 						<div class="col-md-2">
 							<img class="img-responsive" src="../../assets/images/main_logo_500.png"/>

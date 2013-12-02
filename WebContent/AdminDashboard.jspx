@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:fn='http://java.sun.com/jsp/jstl/functions' version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Welcome to Foods R Us</title>
+<link href="${app_root}/assets/css/bootstrap.css" rel="stylesheet" />
+<link href="${app_root}/assets/css/bootstrap-theme.css" rel="stylesheet" />
+<link href="${app_root}/assets/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<div class="container">
+							<img src="${app_root}/assets/images/logo_header_full.png" />
+							<div class="pull-right" style="margin-top:5px;">
+								<a class="btn btn-danger btn-disabled"><span class="glyphicon glyphicon-lock">&#160;</span>Admin Area</a>
+							</div>
+			</div>
+		</div><!-- End Header -->
+		<div id="main" class="container">
+			<div class="row">
+				<div class="col-md-4 info-box">
+					<h4>Analytics</h4>
+					<table class="table table-responsive">
+						<tr>
+							<td>Total items added to cart: </td>
+							<td>
+								<c:choose>
+									<c:when test="${empty total_shopping_items }">
+										Not enough data
+									</c:when>
+									<c:otherwise>
+										${total_shopping_items }
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+						<tr>
+							<td>Average time per item: </td>
+							<td>
+								<c:choose>
+									<c:when test="${empty avg_shopping_time }">
+										Not enough data
+									</c:when>
+									<c:otherwise>
+										<fmt:formatNumber type="number" value="${avg_shopping_time }" maxFractionDigits="2"/> min
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Total checkouts processed: </td>
+							<td>
+								<c:choose>
+									<c:when test="${empty total_checkouts }">
+										Not enough data
+									</c:when>
+									<c:otherwise>
+										${total_checkouts }
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+						<tr>
+							<td>Average time per checkout: </td>
+							<td>
+								<c:choose>
+									<c:when test="${empty avg_checkout_time }">
+										Not enough data
+									</c:when>
+									<c:otherwise>
+										<fmt:formatNumber type="number" value="${avg_checkout_time }" maxFractionDigits="2"/> min
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<jsp:include page="partials/footer.jspx" />
+</body>
+	</html>
+</jsp:root>
