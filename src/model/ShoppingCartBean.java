@@ -1,10 +1,8 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class ShoppingCartBean {
 	private ClientBean client;
@@ -15,6 +13,7 @@ public class ShoppingCartBean {
 	private double grandTotal;
 	private List<ItemBean> items;
 	private ShoppingCoupon coupon;
+	private double discount;
 	
 	public ShoppingCartBean(){
 		client = null;
@@ -135,6 +134,14 @@ public class ShoppingCartBean {
 		return false;
 	}
 	
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
 	private void calculateTotal(){
 		double t = 0;
 		Iterator<ItemBean> it = items.iterator();
@@ -144,7 +151,11 @@ public class ShoppingCartBean {
 			t += tot;
 			temp.setTotal(tot);
 		}
-		double off = (getCoupon().getPercent() * getTotal())/100.0;
+		double off = 0;
+		if(getCoupon()!=null){
+			off = (getCoupon().getPercent() * getTotal())/100.0;
+			this.setDiscount(off);
+		}
 		this.total = t-off;
 		
 		

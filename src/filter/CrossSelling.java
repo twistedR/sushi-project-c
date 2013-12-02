@@ -46,7 +46,6 @@ public class CrossSelling implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("In this fileter");
 		PrintWriter out = response.getWriter();
 		ModifiedResponse wrapper = new ModifiedResponse((HttpServletResponse)response);
 		chain.doFilter(request, wrapper);

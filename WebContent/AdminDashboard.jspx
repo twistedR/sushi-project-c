@@ -121,15 +121,15 @@
 						</c:otherwise>
 					</c:choose>
 					<form action="${app_root}/Admin/Analytics" method="post" style="padding-top:4px;margin-bottom: 10px;border-top:2px solid #eee">
-						<input type="text" placeholder="Coupon Code" name="coupon_code"/>
-						&#160;
-						<input type="text" placeholder="Min Purchase" name="coupon_min"/>
-						&#160;
-						<input type="text" placeholder="% Off" name="coupon_off"/>
-						&#160;
-						<input type="password" placeholder="password" name="admin_password"/>
-						&#160;
-						<button class="btn btn-sm btn-success" name="add_coupon" value="add_coupon">Add</button>
+						<label style="width:20%">Coupon Code:&#160;</label><input type="text" placeholder="Coupon Code" name="coupon_code"/>
+						<br/>
+						<label style="width:20%">Min Purchase:&#160;</label><input type="text" placeholder="Min Purchase" name="coupon_min"/>
+						<br/>
+						<label style="width:20%">Percent Off:&#160;</label><input type="text" placeholder="% Off" name="coupon_off"/>
+						<br/>
+						<label style="width:20%">Admin Pass:&#160;</label><input type="password" placeholder="password" name="admin_password"/>
+						<br/>
+						<button class="btn btn-sm btn-success" name="add_coupon" value="add_coupon" style="margin-left:20%">Add</button>
 					</form>
 				</div>
 			</div>

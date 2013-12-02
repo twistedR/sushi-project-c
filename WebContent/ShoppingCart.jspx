@@ -19,6 +19,13 @@
 <body>
 	<div id="wrapper">
 		<jsp:include page="partials/header.jspx" />
+		<c:if test="${not empty error }">
+			<div class="container">
+				<div class="alert alert-danger">
+					${error }
+				</div>
+			</div>
+		</c:if>
 		<div id="main" class="container">
 			<div class="page-header">
 		  	<h1>Your Shopping cart: <br/>
@@ -66,12 +73,24 @@
 							&#160;
 						</div>
 						<div class="col-md-5">
+							<div style="margin-bottom: 0.5em">
+								<form action="${app_root}/ShoppingCart" method="post">
+									<label for="coupon">Apply coupon?</label>
+									<input type="text" name="coupon" id="coupon" style="width:40%" placeholder="Have a coupon?" class="form-control"/>
+									<button type="submit" name="apply_coupon" class="btn btn-info btn-sm" style="margin-top:0.25em">Use coupon</button>
+								</form>
+							</div>
 							<table class="table table-bordered">
 								<tr>
 									<td class="bold">Subtotal</td>
 									<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.total }" /></td>
 								</tr>
-								
+								<c:if test="${not empty sessionScope.shopping_cart.coupon }">
+									<tr>
+										<td class="bold">Discount</td>
+										<td>-<fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.discount }" /></td>
+									</tr>
+								</c:if>
 								<tr>
 									<td class="bold">Shipping</td>
 									<td><fmt:formatNumber type="currency" value="${sessionScope.shopping_cart.shipping }" /></td>

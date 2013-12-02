@@ -2,6 +2,7 @@ package ctrl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -116,7 +117,6 @@ public class Admin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("here");
 		request.setAttribute("app_root", request.getContextPath());
 		List<ShoppingCoupon> coupons = (List<ShoppingCoupon>) getServletContext().getAttribute("coupons");
 		if(coupons==null){
@@ -124,6 +124,7 @@ public class Admin extends HttpServlet {
 			getServletContext().setAttribute("coupons", coupons);
 		}
 		if(request.getParameter("add_coupon") != null){
+			request.setAttribute("app_root", request.getContextPath());
 			String couponCode = request.getParameter("coupon_code");
 			String couponMin = request.getParameter("coupon_min");
 			String couponOff = request.getParameter("coupon_off");
@@ -137,7 +138,21 @@ public class Admin extends HttpServlet {
 					double min = Double.parseDouble(couponMin);
 					double off = Double.parseDouble(couponOff);
 					ShoppingCoupon sc = new ShoppingCoupon(off, min, couponCode);
-					coupons.add(sc);
+					//Check if coupon already exists
+					Iterator<ShoppingCoupon> it = coupons.iterator();
+					boolean exists = false;
+					while(it.hasNext()){
+						ShoppingCoupon temp = it.next();
+						if(temp.getCode().equals(couponCode)){
+							exists = true;
+						}
+					}
+					if(!exists){
+						coupons.add(sc);
+					}else {
+						request.setAttribute("error", "Coupon already exists.");
+					}
+					
 				}catch(Exception e){
 					request.setAttribute("error", "Not enough information provided.");
 					e.printStackTrace();
