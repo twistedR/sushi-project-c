@@ -184,6 +184,6 @@ public class ShoppingCartBean {
 		double taxes = (fp + this.getShipping()) * (this.getHstValue()/100.0);
 		this.setHst(taxes);
 		
-		this.setGrandTotal(this.getHst() + this.getTotal() + this.getShipping());
+		this.setGrandTotal(this.getHst() + fp + this.getShipping());
 	}
 }
