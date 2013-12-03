@@ -160,22 +160,28 @@ public class ShoppingCartBean {
 			t += tot;
 			temp.setTotal(tot);
 		}
+		this.setTotal(t);
+		
 		double off = 0;
 		if(getCoupon()!=null){
-			off = (getCoupon().getPercent() * getTotal())/100.0;
-			this.setDiscount(off);
+			if(getCoupon().getMinimum() < getTotal()){
+				off = (getCoupon().getPercent() * getTotal())/100.0;
+				this.setDiscount(off);
+			} else {
+				this.setDiscount(0);
+				this.setCoupon(null);
+			}
+		} else {
+			this.setDiscount(0);
 		}
-		this.total = t-off;
+		double fp = getTotal()-getDiscount();
 		
-		
-		
-		
-		if(t>100){
+		if(fp>100){
 			this.setShipping(0);
 		} else {
-			this.setShipping(5);
+			this.setShipping(getBaseShipping());
 		}
-		double taxes = (this.getTotal() + this.getShipping()) * (this.getHstValue()/100.0);
+		double taxes = (fp + this.getShipping()) * (this.getHstValue()/100.0);
 		this.setHst(taxes);
 		
 		this.setGrandTotal(this.getHst() + this.getTotal() + this.getShipping());
