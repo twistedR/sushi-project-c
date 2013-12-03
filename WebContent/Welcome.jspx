@@ -112,7 +112,7 @@
 			<div class="col-xs-12">
 				<div class="pull-right">
 					<h2>
-						Or: <a href="${app_root}/ProjectC/Catalog" class="btn btn-lg btn-default">View
+						Or: <a href="${app_root}/Catalog" class="btn btn-lg btn-default">View
 							all Items!</a>
 					</h2>
 
