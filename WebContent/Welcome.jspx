@@ -83,12 +83,9 @@
 			</div>
 			<div class="col-md-4 text-justified">
 				<blockquote>
-					<p class="lead">Curabitur eleifend augue venenatis risus luctus
-						consectetur. Vestibulum quis hendrerit velit, sed convallis odio.
-						Mauris vitae libero non turpis fringilla cursus. Aliquam a
-						consectetur quam. Morbi pellentesque nulla at dui consectetur, eu
-						tincidunt ligula hendrerit. Sed semper nibh pretium, convallis
-						enim ac, porttitor ligula.</p>
+					<p class="lead">Foods 'R' Us is built around the idea that cooking should be convenient and fun. 
+					We deliver the best possible ingredients for all your needs right to your door. We get all our supplies from 
+					local Canadian suppliers.</p>
 				</blockquote>
 			</div>
 		</div>
@@ -96,7 +93,7 @@
 	<div class="col-xs-12 catalog-row">
 		<div class="row text-center">
 			<div class="col-xs-12">
-				<h1>Browse out selection from one of the following categories</h1>
+				<h1>Browse our selection from one of the following categories</h1>
 			</div>
 			<div class="col-md-3 cat cat-meat">
 				<a href="${app_root}/Catalog?cat_id=3"><span>MEAT</span></a>
@@ -115,7 +112,7 @@
 			<div class="col-xs-12">
 				<div class="pull-right">
 					<h2>
-						Or: <a href="${app_root}/ProjectC" class="btn btn-lg btn-default">View
+						Or: <a href="${app_root}/ProjectC/Catalog" class="btn btn-lg btn-default">View
 							all Items!</a>
 					</h2>
 

@@ -66,7 +66,7 @@ public class Analytics implements ServletRequestAttributeListener, HttpSessionAt
       		checkout_times.put("time", totalTime);
       		checkout_times.put("checkouts", checkouts);
       		
-      		System.out.println("Average Time: "+ ((double)totalTime/(double)checkouts));
+//      		System.out.println("Average Time: "+ ((double)totalTime/(double)checkouts));
       		
       		sess.getServletContext().setAttribute("checkout_times", checkout_times);
       		
@@ -123,7 +123,7 @@ public class Analytics implements ServletRequestAttributeListener, HttpSessionAt
     		shopping_times.put("time", totalTime);
     		shopping_times.put("items", items);
     		
-    		System.out.println("Average Time: "+ ((double)totalTime/(double)items));
+//    		System.out.println("Average Time: "+ ((double)totalTime/(double)items));
     		
     		event.getSession().setAttribute("last_cart_update_time", now);
     		event.getSession().getServletContext().setAttribute("shopping_times", shopping_times);

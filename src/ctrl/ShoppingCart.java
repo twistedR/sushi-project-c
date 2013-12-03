@@ -81,7 +81,7 @@ public class ShoppingCart extends HttpServlet {
 		if(shoppingCart==null){
 			shoppingCart = new ShoppingCartBean();
 			shoppingCart.setHstValue(Double.parseDouble(getServletContext().getInitParameter("HST")));
-			shoppingCart.setShipping(Double.parseDouble(getServletContext().getInitParameter("base-shipping")));
+			shoppingCart.setBaseShipping(Double.parseDouble(getServletContext().getInitParameter("base-shipping")));
 		}
 		// Grab the model
 		ApplicationModel m = (ApplicationModel) getServletContext()

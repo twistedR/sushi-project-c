@@ -261,7 +261,7 @@ public class ApplicationModel {
 		sw.write("<?xml-stylesheet type=\"text/xsl\" href=\"../po.xsl\"?>");
 //		sw.write("\n");
 		marshaller.marshal(po, new StreamResult(sw));
-		System.out.println(sw.toString());
+//		System.out.println(sw.toString());
 		
 		//Check if a folder for todays date exists
 		String finalFolder = Paths.get(folderPath, d).toString();
@@ -307,7 +307,7 @@ public class ApplicationModel {
 		Iterator<String> it = dates.iterator();
 		while(it.hasNext()){
 			String temp = it.next();
-			System.out.println(temp);
+//			System.out.println(temp);
 			File tf = new File(Paths.get(folderPath, temp).toString());
 			if(!tf.exists()) continue;
 			File[] fileList = tf.listFiles();

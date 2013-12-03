@@ -9,6 +9,7 @@ public class ShoppingCartBean {
 	private double total;
 	private double shipping;
 	private double hstValue;
+	private double baseShipping;
 	private double hst;
 	private double grandTotal;
 	private List<ItemBean> items;
@@ -142,6 +143,14 @@ public class ShoppingCartBean {
 		this.discount = discount;
 	}
 
+	public double getBaseShipping() {
+		return baseShipping;
+	}
+
+	public void setBaseShipping(double baseShipping) {
+		this.baseShipping = baseShipping;
+	}
+
 	private void calculateTotal(){
 		double t = 0;
 		Iterator<ItemBean> it = items.iterator();
@@ -163,6 +172,8 @@ public class ShoppingCartBean {
 		
 		if(t>100){
 			this.setShipping(0);
+		} else {
+			this.setShipping(5);
 		}
 		double taxes = (this.getTotal() + this.getShipping()) * (this.getHstValue()/100.0);
 		this.setHst(taxes);
