@@ -65,7 +65,7 @@ public class CrossSelling implements Filter {
 				ad += i.getName() + "</h4>";
 				DecimalFormat df = new DecimalFormat("#.00"); 
 				ad += "<p>$" + df.format(i.getPrice()) + "</p></div>";
-				ad += "<form method=\"post\" action=\"/ProjectC/ShoppingCart\">";
+				ad += "<form method=\"post\" action=\"/"+ request.getServletContext() +"/ShoppingCart\">";
 				ad += "<input value=\""+i.getNumber()+"\" name=\"item_number\" type=\"hidden\">";
 				ad += "<input class=\"form-control input-sm price-input-small\" value=\"1\" name=\"item_quantity\" type=\"text\">";
 				ad += "<button class=\"btn btn-sm btn-success\" name=\"add_to_cart\" type=\"submit\">Add";
